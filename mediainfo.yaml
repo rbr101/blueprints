@@ -1,17 +1,20 @@
 blueprint:
-  name: Media Player Song Change Action
-  description: Sends the media_artist, media_title, and media_player to a defined action whenever the media_title changes on the selected media_player.
+  name: "Media Player Song Change Action"
+  description: >
+    Sends the media_artist, media_title, and media_player to a defined action
+    whenever the media_title changes on the selected media_player.
   domain: automation
   input:
     media_player:
-      name: Media Player
-      description: The media player to monitor for song changes.
+      name: "Media Player"
+      description: "The media player to monitor for song changes."
       selector:
         entity:
           domain: media_player
     action_service:
-      name: Action Service
-      description: The ESPHome service to call with media_artist, media_title, and media_player as data.
+      name: "Action Service"
+      description: >
+        The ESPHome service to call with media_artist, media_title, and media_player as data.
       default: esphome.esphome_tagreader2_set_media_info
 
 trigger:
