@@ -1,6 +1,6 @@
 blueprint:
-  name: Media Player Song Change Action with TagTuner Availability
-  description: Sends the media_artist, media_title, and media_player to a defined action whenever the media_title changes on the selected media_player. Includes a TagTuner device and ensures it is available.
+  name: Media Player Song Change Action
+  description: Sends the media_artist, media_title, and media_player to a defined action whenever the media_title changes on the selected media_player.
   domain: automation
   input:
     media_player:
@@ -8,17 +8,18 @@ blueprint:
       description: The media player to monitor for song changes.
       selector:
         entity:
-          filter:
-            - integration: music_assistant
+          domain: media_player
     action_service:
       name: Action Service
-      description: The ESPHome service to call with media_artist, media_title, media_player, and TagTuner as data.
+      description: The ESPHome service to call with media_artist, media_title, and media_player as data.
       default: esphome.esphome_tagreader2_set_media_info
 
 trigger:
   - platform: state
     entity_id: !input media_player
     attribute: media_title
+
+condition: []
 
 action:
   - service: !input action_service
