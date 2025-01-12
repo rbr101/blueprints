@@ -1,38 +1,28 @@
 blueprint:
-  name: Media Player to ESPHome API
-  description: Sends the currently playing media title and artist to an ESPHome device using the specified API service when they change.
+  name: Media Player Song Change Action
+  description: Sends the media_artist and media_title to a defined action whenever the media_title changes on the selected media_player.
   domain: automation
   input:
     media_player:
       name: Media Player
-      description: The media player to monitor.
+      description: The media player to monitor for song changes.
       selector:
         entity:
           domain: media_player
-    esphome_device_service:
-      name: ESPHome Device Service
-      description: The ESPHome service to call (e.g., esphome.tagreader2_set_media_info).
-      selector:
-        text: {}
+    action_service:
+      name: Action Service
+      description: The service to call with media_artist and media_title as data.
+      default: esphome.esphome_tagreader2_set_media_info
 
 trigger:
   - platform: state
     entity_id: !input media_player
     attribute: media_title
-  - platform: state
-    entity_id: !input media_player
-    attribute: media_artist
 
-condition:
-  - condition: template
-    value_template: >
-      {{ trigger.to_state.attributes.media_title != trigger.from_state.attributes.media_title or
-         trigger.to_state.attributes.media_artist != trigger.from_state.attributes.media_artist }}
+condition: []
 
 action:
-  - service: !input esphome_device_service
+  - service: !input action_service
     data:
-      title: "{{ state_attr(!input media_player, 'media_title') | default('') }}"
-      artist: "{{ state_attr(!input media_player, 'media_artist') | default('') }}"
-
-mode: single
+      media_artist: "{{ state_attr(trigger.entity_id, 'media_artist') }}"
+      media_title: "{{ state_attr(trigger.entity_id, 'media_title') }}"
