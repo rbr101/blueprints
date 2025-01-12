@@ -9,11 +9,6 @@ blueprint:
       selector:
         entity:
           domain: media_player
-    tag_tuner:
-      name: TagTuner
-      description: The TagTuner device to use in the action.
-      selector:
-        device: {}
     action_service:
       name: Action Service
       description: The ESPHome service to call with media_artist, media_title, media_player, and TagTuner as data.
