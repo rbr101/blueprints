@@ -14,7 +14,7 @@ blueprint:
       description: The ESPHome device to send data to.
       selector:
         entity:
-          domain: esphome
+          integration: esphome
 
 trigger:
   - platform: state
@@ -35,7 +35,7 @@ action:
     target:
       entity_id: !input esphome_device
     data:
-      title: "{{ state_attr(trigger.entity_id, 'media_title') }}"
-      artist: "{{ state_attr(trigger.entity_id, 'media_artist') }}"
+      title: "{{ state_attr(!input media_player, 'media_title') }}"
+      artist: "{{ state_attr(!input media_player, 'media_artist') }}"
 
 mode: single
