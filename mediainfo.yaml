@@ -26,4 +26,4 @@ action:
     data:
       artist: "{{ state_attr(trigger.entity_id, 'media_artist') }}"
       title: "{{ state_attr(trigger.entity_id, 'media_title') }}"
-      player: "{{ media_player }}"
+      player: "{{ trigger.entity_id }}"
