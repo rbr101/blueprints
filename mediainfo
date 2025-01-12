@@ -15,9 +15,6 @@ blueprint:
       selector:
         entity:
           domain: esphome
-  variables:
-    media_player: !input media_player
-    esphome_device: !input esphome_device
 
 trigger:
   - platform: state
@@ -35,8 +32,10 @@ condition:
 
 action:
   - service: esphome.<<ESPHOME_DEVICE_SERVICE_NAME>>
+    target:
+      entity_id: !input esphome_device
     data:
-      title: "{{ state_attr(media_player, 'media_title') }}"
-      artist: "{{ state_attr(media_player, 'media_artist') }}"
+      title: "{{ state_attr(!input media_player, 'media_title') }}"
+      artist: "{{ state_attr(!input media_player, 'media_artist') }}"
 
 mode: single
