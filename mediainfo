@@ -31,11 +31,11 @@ condition:
          trigger.to_state.attributes.media_artist != trigger.from_state.attributes.media_artist }}
 
 action:
-  - service: esphome.<<ESPHOME_DEVICE_SERVICE_NAME>>
+  - service: esphome.set_media_info
     target:
       entity_id: !input esphome_device
     data:
-      title: "{{ state_attr(!input media_player, 'media_title') }}"
-      artist: "{{ state_attr(!input media_player, 'media_artist') }}"
+      title: "{{ state_attr(trigger.entity_id, 'media_title') }}"
+      artist: "{{ state_attr(trigger.entity_id, 'media_artist') }}"
 
 mode: single
