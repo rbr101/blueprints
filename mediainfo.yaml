@@ -24,12 +24,6 @@ trigger:
     entity_id: !input media_player
     attribute: media_title
 
-condition:
-  - condition: device
-    device_id: !input tag_tuner
-    domain: device_tracker
-    type: is_home
-
 action:
   - service: !input action_service
     data:
