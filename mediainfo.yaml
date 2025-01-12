@@ -3,6 +3,13 @@ blueprint:
   description: Sends the media_artist, media_title, and media_player to a defined action whenever the media_title changes on the selected media_player. Includes a TagTuner device and ensures it is available.
   domain: automation
   input:
+    tuner_id:
+      name: TagTuner for ESPHome
+      description: Select your NFC tuner device.
+      selector:
+        device:
+          filter:
+            - integration: esphome
     media_player:
       name: Media Player
       description: The media player to monitor for song changes.
