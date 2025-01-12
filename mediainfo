@@ -13,7 +13,7 @@ blueprint:
       name: ESPHome Device Service
       description: The ESPHome service to call (e.g., esphome.tagreader2_set_media_info).
       selector:
-        text:
+        text
 
 trigger:
   - platform: state
@@ -32,7 +32,9 @@ condition:
 action:
   - service: !input esphome_device_service
     data:
-      title: "{{ state_attr((!input media_player), 'media_title') }}"
-      artist: "{{ state_attr((!input media_player), 'media_artist') }}"
+      title: >
+        {{ state_attr(trigger.entity_id, 'media_title') | default('') }}
+      artist: >
+        {{ state_attr(trigger.entity_id, 'media_artist') | default('') }}
 
 mode: single
