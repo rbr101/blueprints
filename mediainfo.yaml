@@ -8,7 +8,8 @@ blueprint:
       description: The media player to monitor for song changes.
       selector:
         entity:
-          domain: media_player
+          filter:
+            - integration: music_assistant
     action_service:
       name: Action Service
       description: The ESPHome service to call with media_artist, media_title, media_player, and TagTuner as data.
