@@ -24,5 +24,5 @@ condition: []
 action:
   - service: !input action_service
     data:
-      media_artist: "{{ state_attr(trigger.entity_id, 'media_artist') }}"
-      media_title: "{{ state_attr(trigger.entity_id, 'media_title') }}"
+      artist: "{{ state_attr(trigger.entity_id, 'media_artist') }}"
+      title: "{{ state_attr(trigger.entity_id, 'media_title') }}"
