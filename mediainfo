@@ -1,0 +1,42 @@
+blueprint:
+  name: Media Player to ESPHome API
+  description: Sends the currently playing media title and artist to ESPHome using the API when they change.
+  domain: automation
+  input:
+    media_player:
+      name: Media Player
+      description: The media player to monitor.
+      selector:
+        entity:
+          domain: media_player
+    esphome_device:
+      name: ESPHome Device
+      description: The ESPHome device to send data to.
+      selector:
+        entity:
+          domain: esphome
+  variables:
+    media_player: !input media_player
+    esphome_device: !input esphome_device
+
+trigger:
+  - platform: state
+    entity_id: !input media_player
+    attribute: media_title
+  - platform: state
+    entity_id: !input media_player
+    attribute: media_artist
+
+condition:
+  - condition: template
+    value_template: >
+      {{ trigger.to_state.attributes.media_title != trigger.from_state.attributes.media_title or
+         trigger.to_state.attributes.media_artist != trigger.from_state.attributes.media_artist }}
+
+action:
+  - service: esphome.<<ESPHOME_DEVICE_SERVICE_NAME>>
+    data:
+      title: "{{ state_attr(media_player, 'media_title') }}"
+      artist: "{{ state_attr(media_player, 'media_artist') }}"
+
+mode: single
