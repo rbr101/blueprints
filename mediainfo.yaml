@@ -27,7 +27,7 @@ condition: []
 action:
   - service: !input action_service
     data:
-      artist: "{{ state_attr(trigger.entity_id, 'media_artist') }}"
-      title: "{{ state_attr(trigger.entity_id, 'media_title') }}"
-      album: "{{ state_attr(trigger.entity_id, 'media_album_name') }}"
+      artist: '{{ trigger.to_state.attributes.media_artist }}'
+      title: '{{ trigger.to_state.attributes.media_title }}'
+      album: '{{ trigger.to_state.attributes.media_album_name }}'
       player: !input media_player
