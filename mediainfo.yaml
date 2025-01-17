@@ -15,7 +15,7 @@ blueprint:
       name: "Action Service"
       description: >
         The ESPHome service to call with media_artist, media_title, and media_player as data.
-      default: esphome.esphome_tagreader2_set_media_info
+      default: esphome.esphome_tagreader3_set_media_info
 
 trigger:
   - platform: state
@@ -29,4 +29,5 @@ action:
     data:
       artist: "{{ state_attr(trigger.entity_id, 'media_artist') }}"
       title: "{{ state_attr(trigger.entity_id, 'media_title') }}"
+      album: "{{ state_attr(trigger.entity_id, 'media_album_name') }}"
       player: "{{ input.media_player }}"
