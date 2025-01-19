@@ -46,7 +46,6 @@ action:
               artist: '{{ trigger.to_state.attributes.media_artist }}'
               title: '{{ trigger.to_state.attributes.media_title }}'
               album: '{{ trigger.to_state.attributes.media_album_name }}'
-              player: !input media_player
 
   # Second service call for other state changes
   - choose:
