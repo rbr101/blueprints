@@ -58,3 +58,4 @@ action:
             data:
               state: '{{ trigger.to_state.state }}'
               player: !input media_player
+              volume_level: '{{ trigger.to_state.attributes.volume_level }}'
